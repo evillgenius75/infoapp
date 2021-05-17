@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-infoapp-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      env: dev
+  template:
+    metadata:
+      labels:
+        env: dev
+    spec:
+      $setElementOrder/containers:
+      - name: frontend
+      containers:
+      - $setElementOrder/env:
+        - name: VERSION
+        env:
+        - name: VERSION
+          value: development
+        image: evillgenius/infoapp-fe:v1
+        name: frontend

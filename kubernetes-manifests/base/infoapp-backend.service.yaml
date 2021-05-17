@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-infoapp-backend
+spec:
+  type: ClusterIP
+  selector:
+    app: infoapp
+    tier: backend
+    env: base
+  ports:
+  - port: 8080
+    targetPort: backend

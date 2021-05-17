@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-infoapp-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: infoapp
+      tier: frontend
+      env: base
+  template:
+    metadata:
+      labels:
+        app: infoapp
+        tier: frontend
+        env: base
+    spec:
+      securityContext:
+        runAsUser: 65534
+        runAsNonRoot: true
+      containers:
+      - name: frontend
+        image: infoapp-fe
+        env:
+        - name: VERSION
+          value: base
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
+        imagePullPolicy: Always
+        readinessProbe:
+          initialDelaySeconds: 2
+          periodSeconds: 5
+          httpGet:
+            path: /healthz
+            port: 8080
+        ports:
+        - name: frontend
+          containerPort: 8080
