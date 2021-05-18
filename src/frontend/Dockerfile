@@ -32,6 +32,8 @@ RUN go build \
 # Final stage: the running container.
 FROM scratch AS final
 
+COPY --from=builder /src/templates/index.html /templates/index.html
+
 # Import the user and group files from the first stage.
 COPY --from=builder /user/group /user/passwd /etc/
 

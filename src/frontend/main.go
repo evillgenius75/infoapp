@@ -21,7 +21,7 @@ var backend string
 func main() {
 
 	port := ":8080"
-	backend = *flag.String("backend-service", "http://gceme-backend:8080", "hostname of backend server")
+	backend = *flag.String("backend-service", "http://go-infoapp-backend:8080", "hostname of backend server")
 	flag.Parse()
 
 	log.Printf("Frontend version: %s\n", version)
